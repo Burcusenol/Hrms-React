@@ -4,12 +4,13 @@ import {
   Container,
   Menu,
   Segment,
-  Visibility,
 } from "semantic-ui-react";
 import { useHistory } from "react-router";
 import SignedIn from "./SignedIn";
 import SignedOut from "./SignedOut";
-import Frame from "./Frame";
+import { NavLink } from "react-router-dom";
+
+
 
 
 
@@ -25,28 +26,24 @@ export default function Navi() {
    function handleSignIn() {
      setIsAuthenticated(true)
    }
-    
+  
     return (
         <div>
-             <Visibility
-          once={false}
-
-        >
-          <Segment
-            inverted
+           
+           <Segment
+           inverted
             textAlign='center'
-            style={{ minHeight: 700, padding: '1em 0em' }}
+            style={{minHeight: 100,  padding: '1em 0em' }}
             vertical
           >
             <Menu
-              fixed
-             inverted 
+              inverted 
               secondary
               size='large'
             >
               <Container>
-              <Menu.Item as="a">Home</Menu.Item>
-              <Menu.Item as="a">Jobs</Menu.Item>
+              <Menu.Item as={NavLink} to="/home">Home</Menu.Item>
+                 <Menu.Item as={NavLink} to="/jobadvertisement">Jobs</Menu.Item>
               <Menu.Item as="a">Candidates</Menu.Item>
               <Menu.Item as="a">Employers</Menu.Item>
               <Menu.Item as="a">Employees</Menu.Item>
@@ -69,9 +66,10 @@ export default function Navi() {
               </Menu.Menu>
             </Container>
           </Menu>
-         <Frame/>
-        </Segment>
-      </Visibility>
+          </Segment>
+           
+     
+     
 
        
 
