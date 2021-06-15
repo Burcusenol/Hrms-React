@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   Button,
   Container,
@@ -8,33 +8,66 @@ import {
   Image,
   Segment,
   Card,
-  
+  Icon,
 } from "semantic-ui-react";
+import JobAdvertisementService from "../services/jobAdvertisementService";
+
 export default function DataTable() {
+  const [jobPosts, setJobPost] = useState([]);
+  useEffect(() => {
+    let jobPostService = new JobAdvertisementService();
+    jobPostService.getJobPost().then((result) => setJobPost(result.data.data));
+  }, []);
   return (
     <div>
-      <Segment style={{ padding: "8em 0em" }} vertical>
+      <Segment circle="true" style={{ padding: "8em 0em" }} vertical>
         <Container>
-          <Header as="h3" style={{ fontSize: "2em" }}>
+          <Header circle="true" as="h3" style={{ fontSize: "3em" }}>
             Recent Jobs
           </Header>
           <Card.Group itemsPerRow={4}>
-            <Card>
-              <Image
-                src="https://react.semantic-ui.com/images/avatar/large/daniel.jpg"
-                wrapped
-                ui={false}
-              />
-              <Card.Content>
-                <Card.Header>Daniel</Card.Header>
-                <Card.Meta>Joined in 2016</Card.Meta>
-                <Card.Description>
-                  Daniel is a comedian living in Nashville.
-                </Card.Description>
-              </Card.Content>
-             
-            </Card>
-            
+            {jobPosts.map((jobPost) => (
+              <Card
+                color="violet"
+                circle="true"
+                style={{
+                  minHeight: 350,
+                  fontSize: "1.2em",
+                  fontWeight: "normal",
+                  padding: "3.4em 0.50em",
+                }}
+                key={jobPost.id}
+              >
+                <Card.Content>
+                  <Icon
+                    color="violet"
+                    style={{ paddingBottom: "1.7em" }}
+                    size="huge"
+                    name="briefcase"
+                  />
+
+                  <Card.Header>{jobPost.jobTitle.title}</Card.Header>
+                  <Card.Meta>{jobPost.employer.companyName}</Card.Meta>
+                  <Card.Description>{jobPost.city.cityName}</Card.Description>
+                  <Card.Description>
+                    {jobPost.minSalary} <Icon name="lira" /> -{" "}
+                    {jobPost.maxSalary} <Icon name="lira" />
+                  </Card.Description>
+                </Card.Content>
+
+                <Divider>
+                  <Button
+                    circular
+                    style={{ marginTop: "0.90em" }}
+                    size="big"
+                    inverted
+                    color="blue"
+                  >
+                    Başvur
+                  </Button>
+                </Divider>
+              </Card>
+            ))}
           </Card.Group>
         </Container>
       </Segment>

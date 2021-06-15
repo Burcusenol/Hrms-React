@@ -44,9 +44,9 @@ export default function Navi() {
               <Container>
               <Menu.Item as={NavLink} to="/home">Home</Menu.Item>
                  <Menu.Item as={NavLink} to="/jobadvertisement">Jobs</Menu.Item>
-              <Menu.Item as="a">Candidates</Menu.Item>
-              <Menu.Item as="a">Employers</Menu.Item>
-              <Menu.Item as="a">Employees</Menu.Item>
+              <Menu.Item as={NavLink} to="/candidates">Candidates</Menu.Item>
+              <Menu.Item as={NavLink} to="/employers">Employers</Menu.Item>
+              <Menu.Item as={NavLink} to="/employees">Employees</Menu.Item>
               <Menu.Menu position="right">
                 <Dropdown item text="Language">
                   <Dropdown.Menu>

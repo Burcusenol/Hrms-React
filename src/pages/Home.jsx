@@ -7,6 +7,7 @@ export default class Home extends Component {
             <div>
                <Filter/>
                <DataTable/>
+               
             </div>
         )
     }
