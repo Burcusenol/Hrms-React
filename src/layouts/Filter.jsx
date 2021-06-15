@@ -62,6 +62,7 @@ export default function Frame() {
 
                 <Grid.Column>
                   <Input
+                  search
                     list="cities"
                     icon="location arrow"
                     iconPosition="left"
