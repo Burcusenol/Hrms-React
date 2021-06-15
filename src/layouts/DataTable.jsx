@@ -69,6 +69,15 @@ export default function DataTable() {
               </Card>
             ))}
           </Card.Group>
+          <br/>
+            
+          <Button circular animated basic color="violet" size="massive">
+                    <Button.Content visible>Tüm İş İlanlarını Görüntüle</Button.Content>
+                    <Button.Content hidden>
+                      <Icon name="arrow right" />
+                    </Button.Content>
+                  </Button>
+         
         </Container>
       </Segment>
 
