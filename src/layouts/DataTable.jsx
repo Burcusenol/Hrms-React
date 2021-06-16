@@ -30,7 +30,7 @@ export default function DataTable() {
               <Card
                 color="violet"
                 circle="true"
-                style={{
+                style={{                   
                   minHeight: 350,
                   fontSize: "1.2em",
                   fontWeight: "normal",
