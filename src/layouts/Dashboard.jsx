@@ -16,7 +16,7 @@ export default function Dashboard() {
           <Grid.Column>
           <Route exact path="/" component={Home} />
           <Route exact path="/home" component={Home} />
-          <Route exact path="/jobadvertisements" component={JobAdvertisementList} />
+          <Route  path="/jobadvertisements" component={JobAdvertisementList} />
           <Route  path="/employers" component={EmployerList} />
           <Route  path="/employees" component={EmployeesList} />
           <Route  path="/candidates" component={CandidateList} />
