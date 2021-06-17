@@ -25,7 +25,7 @@ export default function CandidateList() {
       <Segment circle="true" style={{ padding: "8em 0em" }} vertical>
         <Container>
           <Header circle="true" as="h3" style={{ fontSize: "3em" }}>
-            İş arayanlar Listesi
+            İş Arayanlar 
           </Header>
           <Card.Group itemsPerRow={1}>
             {candidates.map((candidate) => (

@@ -26,7 +26,7 @@ export default function EmployerList() {
       <Segment circle="true" style={{ padding: "8em 0em" }} vertical>
         <Container>
           <Header circle="true" as="h3" style={{ fontSize: "3em" }}>
-            Şirket Listesi
+            Şirketler
           </Header>
           <Card.Group itemsPerRow={3}>
             {employers.map((employer) => (

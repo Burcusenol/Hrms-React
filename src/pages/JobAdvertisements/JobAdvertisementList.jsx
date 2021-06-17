@@ -22,7 +22,7 @@ export default function JobAdvertisementList() {
       <Segment circle="true" style={{ padding: "8em 0em" }} vertical>
         <Container>
           <Header circle="true" as="h3" style={{ fontSize: "3em" }}>
-            Recent Jobs
+            İş İlanları
           </Header>
           <Card.Group itemsPerRow={4}>
             {jobPosts.map((jobPost) => (
