@@ -91,9 +91,6 @@ export default function CandidateList() {
                   </Card.Content>
                   </Grid.Column>
                   <Grid.Column width={3}>
-                 
-
-                  <Icon aniated corner="top right" circular color="red" name="heart" />{" "}
 
                         <Button
                         style={{ marginTop: "1.5em" }}
