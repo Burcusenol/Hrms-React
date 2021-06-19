@@ -69,7 +69,7 @@ export default function JobAdvertisementList() {
                     inverted
                     color="blue"
                   >
-                    Başvur
+                    İlana Git
                   </Button>
                 </Divider>
               </Card>

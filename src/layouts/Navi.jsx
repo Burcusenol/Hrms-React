@@ -43,7 +43,7 @@ export default function Navi() {
             >
               <Container>
               <Menu.Item as={NavLink} to="/home">Home</Menu.Item>
-                 <Menu.Item as={NavLink} to="/jobadvertisements">Jobs</Menu.Item>
+              <Menu.Item as={NavLink} to="/jobadvertisements">Jobs</Menu.Item>
               <Menu.Item as={NavLink} to="/candidates">Candidates</Menu.Item>
               <Menu.Item as={NavLink} to="/employers">Employers</Menu.Item>
               <Menu.Item as={NavLink} to="/employees">Employees</Menu.Item>
