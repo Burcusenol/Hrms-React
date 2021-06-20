@@ -6,6 +6,7 @@ import { Grid } from "semantic-ui-react";
 import EmployerList from '../pages/Employers/EmployerList';
 import EmployeesList from '../pages/Employees/EmployeesList';
 import CandidateList from '../pages/Candidates/CandidateList';
+import JobaAdvertisementAdd from '../pages/JobAdvertisements/JobAdvertisementAdd';
 export default function Dashboard() {
   return (
     <div>
@@ -20,6 +21,7 @@ export default function Dashboard() {
           <Route  path="/employers" component={EmployerList} />
           <Route  path="/employees" component={EmployeesList} />
           <Route  path="/candidates" component={CandidateList} />
+          <Route  path="/addpost" component={JobaAdvertisementAdd} />
           </Grid.Column> 
         </Grid.Row>
       </Grid>

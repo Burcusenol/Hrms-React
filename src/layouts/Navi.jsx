@@ -1,9 +1,10 @@
 import React, { useState} from "react";
 import {
-  Dropdown,
   Container,
   Menu,
   Segment,
+  Icon,
+  Button
 } from "semantic-ui-react";
 import { useHistory } from "react-router";
 import SignedIn from "./SignedIn";
@@ -48,13 +49,9 @@ export default function Navi() {
               <Menu.Item as={NavLink} to="/employers">Employers</Menu.Item>
               <Menu.Item as={NavLink} to="/employees">Employees</Menu.Item>
               <Menu.Menu position="right">
-                <Dropdown item text="Language">
-                  <Dropdown.Menu>
-                    <Dropdown.Item>English</Dropdown.Item>
-                    <Dropdown.Item>Russian</Dropdown.Item>
-                    <Dropdown.Item>Spanish</Dropdown.Item>
-                  </Dropdown.Menu>
-                </Dropdown>
+                <Menu.Item >
+                   <Button as={NavLink} to="/addpost" circular inverted color='purple'  ><Icon  name="upload" />Post A Job</Button>
+                </Menu.Item>
 
                 <Menu.Item>
                   {isAuthenticated ? (

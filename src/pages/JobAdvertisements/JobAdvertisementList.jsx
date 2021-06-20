@@ -85,7 +85,7 @@ export default function JobAdvertisementList() {
             pointing
             secondary
             totalPages={10}
-            circle
+            circle="true"
             size="massive"
           />
         </Container>

@@ -97,7 +97,7 @@ export default function EmployerList() {
             pointing
             secondary
             totalPages={10}
-            circle
+            circle="true"
             size="massive"
           />
         </Container>
