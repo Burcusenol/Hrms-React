@@ -50,7 +50,7 @@ export default function Navi() {
               <Menu.Item as={NavLink} to="/employees">Employees</Menu.Item>
               <Menu.Menu position="right">
                 <Menu.Item >
-                   <Button as={NavLink} to="/addpost" circular inverted color='purple'  ><Icon  name="upload" />Post A Job</Button>
+                   <Button as={NavLink} to="/jobadd" circular inverted color='purple'  ><Icon  name="upload" />Post A Job</Button>
                 </Menu.Item>
 
                 <Menu.Item>

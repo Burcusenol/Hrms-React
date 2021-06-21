@@ -15,7 +15,7 @@ export default function JobAdvertisementList() {
   const [jobPosts, setJobPost] = useState([]);
   useEffect(() => {
     let jobPostService = new JobAdvertisementService();
-    jobPostService.getJobPost().then((result) => setJobPost(result.data.data));
+    jobPostService.getActiveJobs().then((result) => setJobPost(result.data.data));
   }, []);
   return (
     <div>

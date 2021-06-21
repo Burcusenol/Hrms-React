@@ -21,7 +21,7 @@ export default function Dashboard() {
           <Route  path="/employers" component={EmployerList} />
           <Route  path="/employees" component={EmployeesList} />
           <Route  path="/candidates" component={CandidateList} />
-          <Route  path="/addpost" component={JobaAdvertisementAdd} />
+          <Route  path="/jobadd" component={JobaAdvertisementAdd} />
           </Grid.Column> 
         </Grid.Row>
       </Grid>
