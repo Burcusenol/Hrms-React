@@ -1,13 +1,56 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   Table,
   Segment,
   Container,
   Icon,
-  Card
+  Card,
+  Button,
+  Divider
 } from "semantic-ui-react";
+import JobAdvertisementService from "../../services/jobAdvertisementService";
+import swal from "sweetalert";
 
 export default function EmployeesList() {
+  const [jobAdvertisements, setJobAdvertisements] = useState([]);
+  let jobAdvertisementService = new JobAdvertisementService();
+
+  useEffect(() => {
+    let jobAdvertisementService = new JobAdvertisementService();
+    jobAdvertisementService
+      .getConfirmStatusFalse()
+      .then((result) => setJobAdvertisements(result.data.data));
+  }, []);
+
+  const confirmStatusTrue = (jobAdvertisementId) => {
+    jobAdvertisementService.updateConfirmStatus(jobAdvertisementId).then(
+      swal({
+        title: "Başarılı!",
+        text: "İş ilanı onaylandı!",
+        icon: "success",
+        button: "OK",
+      }).then(function () {
+        window.location.reload();
+      })
+    );
+  };
+
+  const deleteJob = (jobAdvertisementId) => {
+    jobAdvertisementService.deleteJobAdvertisement(jobAdvertisementId).then(swal({
+
+        title:"Emin Misiniz?",
+        icon:"warning",
+        buttons:true,
+        dangerMode:true
+
+    })
+    .then((willDelete)=>{
+        if(willDelete){
+        swal("İş ilanı silindi.",{icon:"success"})
+        .then(function(){window.location.reload()});
+    }}));
+};
+
   return (
     <div>
       <Segment style={{ padding: "17em 0em" }} vertical>
@@ -26,26 +69,71 @@ export default function EmployeesList() {
               <Table color="orange">
                 <Table.Header>
                   <Table.Row>
-                    <Table.HeaderCell>Description</Table.HeaderCell>
-                    <Table.HeaderCell>Min Salary</Table.HeaderCell>
-                    <Table.HeaderCell>Max Salary</Table.HeaderCell>
-                    <Table.HeaderCell>Available Positions</Table.HeaderCell>
-                    <Table.HeaderCell>Deadline</Table.HeaderCell>
-                    <Table.HeaderCell>Position</Table.HeaderCell>
-                    <Table.HeaderCell>City</Table.HeaderCell>
+                    <Table.HeaderCell>Firma Adı</Table.HeaderCell>
+                    <Table.HeaderCell>Şehir</Table.HeaderCell>
+                    <Table.HeaderCell>Pozisyon</Table.HeaderCell>
+                    <Table.HeaderCell>Alınacak Kişi Sayısı</Table.HeaderCell>
+                    <Table.HeaderCell>Son Başvuru Tarihi</Table.HeaderCell>
+                    <Table.HeaderCell>Maaş Aralığı</Table.HeaderCell>
+                    <Table.HeaderCell>Onay Durumu</Table.HeaderCell>
+                    <Table.HeaderCell>Onay İşlemi</Table.HeaderCell>
                   </Table.Row>
                 </Table.Header>
 
-                <Table.Body>
-                  <Table.Row>
-                    <Table.Cell></Table.Cell>
-                    <Table.Cell> </Table.Cell>
-                    <Table.Cell></Table.Cell>
-                    <Table.Cell> </Table.Cell>
-                    <Table.Cell></Table.Cell>
-                    <Table.Cell></Table.Cell>
-                    <Table.Cell></Table.Cell>
-                  </Table.Row>
+                <Table.Body >
+                  {jobAdvertisements.map((jobAdvertisement) => (
+                    <Table.Row key={jobAdvertisement.id} 
+                    >
+                      <Table.Cell>
+                        {jobAdvertisement.employer.companyName}
+                      </Table.Cell>
+                      <Table.Cell>{jobAdvertisement.city.cityName} </Table.Cell>
+                      <Table.Cell>{jobAdvertisement.jobTitle.title}</Table.Cell>
+                      <Table.Cell>{jobAdvertisement.quata}</Table.Cell>
+                      <Table.Cell>
+                        {jobAdvertisement.applicationDeadline}
+                      </Table.Cell>
+                      <Table.Cell>
+                        {jobAdvertisement.minSalary}-
+                        {jobAdvertisement.maxSalary}
+                      </Table.Cell>
+                      <Table.Cell>
+                        {jobAdvertisement.confirmStatus === false
+                          ? "Onaylanmadı"
+                          : "Onaylandı"}
+                      </Table.Cell>
+                      <Table.Cell>
+                         
+                        <Button
+                          animated
+                          basic
+                          color="green"
+                          onClick={(e) =>
+                            confirmStatusTrue(jobAdvertisement.id)
+                          }
+                        >
+                          <Button.Content visible>Onayla</Button.Content>
+                          <Button.Content hidden>
+                            <Icon name="check" />
+                          </Button.Content>
+                        </Button>
+                        <Divider />
+                        <Button
+                          animated
+                          basic
+                          color="orange"
+                          onClick={(e) =>
+                            deleteJob(jobAdvertisement.id)
+                          }
+                        >
+                          <Button.Content visible>İlanı Sil</Button.Content>
+                          <Button.Content hidden>
+                            <Icon name="delete" />
+                          </Button.Content>
+                        </Button>
+                      </Table.Cell>
+                    </Table.Row>
+                  ))}
                 </Table.Body>
               </Table>
             </Card.Content>

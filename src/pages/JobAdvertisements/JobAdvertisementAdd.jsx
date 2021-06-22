@@ -10,7 +10,7 @@ import WorkTimeTypeService from '../../services/workTimeTypeService';
 import JobTitleService from '../../services/jobTitleService';
 import EmployerService from "../../services/employerService";
 import * as moment from 'moment'
-
+import swal from "sweetalert";
 
 export default function JobPosting() {
   let jobAdvertisementService = new JobAdvertisementService()
@@ -44,8 +44,8 @@ export default function JobPosting() {
       validationSchema: JobAdvertAddSchema,
       onSubmit: (values) => {
           jobAdvertisementService.addJobAdvertisement(values).then((result) => console.log(result.data.data));
-          alert("Job Advertisement is added. It is going be listed after validation.");
-          history.push("/home");
+          swal("Başarılı!", "İş ilanı eklendi!", "success");
+          history.push("/jobadd");
       },
   });
 
@@ -381,9 +381,6 @@ export default function JobPosting() {
                     <Icon name="check" />
                   </Button.Content>
                 </Button>
-                      {/* <pre>
-                          {JSON.stringify(formik.values, null, 2)}
-                      </pre> */}
                   </Form>
               </Card.Content>
           </Card>
