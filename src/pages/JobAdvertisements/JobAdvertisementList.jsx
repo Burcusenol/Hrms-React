@@ -13,12 +13,12 @@ import { NavLink } from "react-router-dom";
 import JobAdvertisementService from "../../services/jobAdvertisementService";
 
 export default function JobAdvertisementList() {
-  const [jobPosts, setJobPost] = useState([]);
+  const [jobPosts, setJobPosts] = useState([]);
   useEffect(() => {
     let jobPostService = new JobAdvertisementService();
     jobPostService
       .getisActiveAndConfirmed()
-      .then((result) => setJobPost(result.data.data));
+      .then((result) => setJobPosts(result.data.data));
   }, []);
   return (
     <div>
@@ -67,7 +67,7 @@ export default function JobAdvertisementList() {
                 <Divider>
                   <Button
                     as={NavLink}
-                    to={`/jobadvertisements/${jobPost.id}`}
+                    to={`/jobdetail/${jobPost.id}`}
                     circular
                     style={{ marginTop: "0.90em" }}
                     size="big"

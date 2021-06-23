@@ -23,8 +23,8 @@ export default function Dashboard() {
           <Route  path="/employees" component={EmployeesList} />
           <Route  path="/candidates" component={CandidateList} />
           <Route  path="/jobadd" component={JobaAdvertisementAdd} />
-          <Route exact path="/jobdetail/:jobAdvertisementId" component={JobAdvertisementDetail} />
-          <Route  path="/jobadvertisements/:jobAdvertisementId" component={JobAdvertisementDetail}/>
+          <Route  path="/jobdetail/:id" component={JobAdvertisementDetail} />
+          <Route  path="/jobadvertisements/:id" component={JobAdvertisementDetail}/>
           </Grid.Column> 
         </Grid.Row>
       </Grid>
