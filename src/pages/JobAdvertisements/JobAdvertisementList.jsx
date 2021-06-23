@@ -7,22 +7,25 @@ import {
   Segment,
   Card,
   Icon,
-  Pagination
+  Pagination,
 } from "semantic-ui-react";
+import { NavLink } from "react-router-dom";
 import JobAdvertisementService from "../../services/jobAdvertisementService";
 
 export default function JobAdvertisementList() {
   const [jobPosts, setJobPost] = useState([]);
   useEffect(() => {
     let jobPostService = new JobAdvertisementService();
-    jobPostService.getisActiveAndConfirmed().then((result) => setJobPost(result.data.data));
+    jobPostService
+      .getisActiveAndConfirmed()
+      .then((result) => setJobPost(result.data.data));
   }, []);
   return (
     <div>
       <Segment circle="true" style={{ padding: "8em 0em" }} vertical>
         <Container>
           <Header circle="true" as="h3" style={{ fontSize: "3em" }}>
-            İş İlanları
+            Recent Job
           </Header>
           <Card.Group itemsPerRow={4}>
             {jobPosts.map((jobPost) => (
@@ -63,6 +66,8 @@ export default function JobAdvertisementList() {
 
                 <Divider>
                   <Button
+                    as={NavLink}
+                    to={`/jobadvertisements/${jobPost.id}`}
                     circular
                     style={{ marginTop: "0.90em" }}
                     size="big"

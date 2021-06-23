@@ -103,7 +103,7 @@ export default function JobPosting() {
       <div>
          <Segment style={{ padding: "10em 0em" }} vertical>
         <Container>
-          <Card fluid color = 'black'>
+          <Card fluid color = 'blue'>
           <Card.Header
               textAlign="center"
               style={{ fontSize: "2em", marginBottom: "1em", marginTop: "1em" }}
@@ -264,7 +264,7 @@ export default function JobPosting() {
                                   <Input
                                        style={{ marginRight: "1em", marginTop: "1em" }}
                                       type="number"
-                                      placeholder="Minimum Salary"
+                                      placeholder="Minimum Maaş..."
                                       value={formik.values.minSalary}
                                       name="minSalary"
                                       onChange={formik.handleChange}
@@ -284,7 +284,7 @@ export default function JobPosting() {
                                   <Input
                                        style={{ marginRight: "1em", marginTop: "1em" }}
                                       type="number"
-                                      placeholder="Maximum Salary"
+                                      placeholder="Maximum Maaş..."
                                       value={formik.values.maxSalary}
                                       name="maxSalary"
                                       onChange={formik.handleChange}
@@ -315,7 +315,7 @@ export default function JobPosting() {
                                       value={formik.values.quata}
                                       onBlur={formik.handleBlur}
                                       type="number"
-                                      placeholder="Open Positions"
+                                      placeholder="Personel Sayısı..."
                                   />
                                   {formik.errors.quata && formik.touched.quata && (
                                       <div className={"ui pointing red basic label"}>
@@ -338,7 +338,7 @@ export default function JobPosting() {
                                       value={formik.values.applicationDeadline}
                                       onBlur={formik.handleBlur}
                                       name="applicationDeadline"
-                                      placeholder="Deadline"
+                                      placeholder="Son Başvuru Tarihi..."
                                   />
                                   {formik.errors.applicationDeadline && formik.touched.applicationDeadline && (
                                       <div className={"ui pointing red basic label"}>
@@ -354,7 +354,7 @@ export default function JobPosting() {
                     <Icon name="briefcase" /> İş Tanımı:
                   </Label>
                           <TextArea
-                              placeholder="Description"
+                              placeholder="İş Tanımı..."
                               style={{ marginRight: "1em", marginTop: "1em" }}
                               error={Boolean(formik.errors.description).toString()}
                               value={formik.values.description}

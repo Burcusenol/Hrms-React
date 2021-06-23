@@ -28,4 +28,8 @@ export default class JobAdvertisementService{
     deleteJobAdvertisement(jobAdvertisementId){
         return axios.post("/jobAdvertisements/delete?jobAdvertisementId="+jobAdvertisementId)
     }
+
+    getByJobAdvertisementId(jobAdvertisementId){
+        return axios.get("/jobAdvertisements/getById?id="+jobAdvertisementId)
+    }
 }
