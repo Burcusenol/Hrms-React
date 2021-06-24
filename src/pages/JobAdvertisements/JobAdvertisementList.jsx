@@ -10,6 +10,7 @@ import {
   Pagination,
 } from "semantic-ui-react";
 import { NavLink } from "react-router-dom";
+import Filter from '../../layouts/Filter'
 import JobAdvertisementService from "../../services/jobAdvertisementService";
 
 export default function JobAdvertisementList() {
@@ -21,9 +22,10 @@ export default function JobAdvertisementList() {
       .then((result) => setJobPosts(result.data.data));
   }, []);
   return (
-    <div>
-      <Segment circle="true" style={{ padding: "8em 0em" }} vertical>
+    <div><Filter/>
+      <Segment circle="true"  style={{ padding: "8em 0em" }} vertical>
         <Container>
+          
           <Header circle="true" as="h3" style={{ fontSize: "3em" }}>
             Recent Job
           </Header>
@@ -67,7 +69,7 @@ export default function JobAdvertisementList() {
                 <Divider>
                   <Button
                     as={NavLink}
-                    to={`/jobdetail/${jobPost.id}`}
+                    to={`/jobadvertisements/${jobPost.id}`}
                     circular
                     style={{ marginTop: "0.90em" }}
                     size="big"

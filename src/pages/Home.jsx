@@ -8,14 +8,12 @@ import {
     Image,
     Segment
   } from "semantic-ui-react";
-import Filter from '../layouts/Filter'
 import JobAdvertisementList from './JobAdvertisements/JobAdvertisementList'
 
 export default class Home extends Component {
     render() {
         return (
             <div>
-         <Filter/>
          <JobAdvertisementList/>
          <Segment style={{ padding: "0em" }} vertical>
         <Grid celled="internally" columns="equal" stackable>

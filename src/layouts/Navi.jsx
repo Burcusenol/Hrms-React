@@ -4,7 +4,8 @@ import {
   Menu,
   Segment,
   Icon,
-  Button
+  Button,
+  Dropdown
 } from "semantic-ui-react";
 import { useHistory } from "react-router";
 import SignedIn from "./SignedIn";
@@ -43,11 +44,20 @@ export default function Navi() {
               size='large'
             >
               <Container>
-              <Menu.Item as={NavLink} to="/home">Home</Menu.Item>
+              <Menu.Item  as={NavLink} to="/home">Home</Menu.Item>
               <Menu.Item as={NavLink} to="/jobadvertisements">Jobs</Menu.Item>
               <Menu.Item as={NavLink} to="/candidates">Candidates</Menu.Item>
               <Menu.Item as={NavLink} to="/employers">Employers</Menu.Item>
-              <Menu.Item as={NavLink} to="/employees">Employees</Menu.Item>
+
+
+              <Menu.Menu style={{marginTop:"1.3em"}} >
+          <Dropdown item text='Employees' pointing="top">
+            <Dropdown.Menu>
+                <Dropdown.Item as={NavLink} to="/employees">HRMS Personel</Dropdown.Item>
+                   <Dropdown.Item as={NavLink} to="/jobconfirm">Onaylanmamış İlanlar</Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
+          </Menu.Menu>
               <Menu.Menu position="right">
                 <Menu.Item >
                    <Button as={NavLink} to="/jobadd" circular inverted color='purple'  ><Icon  name="upload" />Post A Job</Button>

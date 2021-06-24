@@ -4,10 +4,11 @@ import JobAdvertisementList from '../pages/JobAdvertisements/JobAdvertisementLis
 import {Route} from 'react-router-dom'
 import { Grid } from "semantic-ui-react";
 import EmployerList from '../pages/Employers/EmployerList';
-import EmployeesList from '../pages/Employees/EmployeesList';
 import CandidateList from '../pages/Candidates/CandidateList';
 import JobaAdvertisementAdd from '../pages/JobAdvertisements/JobAdvertisementAdd';
 import JobAdvertisementDetail from '../pages/JobAdvertisements/JobAdvertisementDetail';
+import JobConfirmList from '../pages/Employees/JobConfirmList';
+import EmployeesList from '../pages/Employees/EmployeesList';
 export default function Dashboard() {
   return (
     <div>
@@ -18,13 +19,14 @@ export default function Dashboard() {
           <Grid.Column>
           <Route exact path="/" component={Home} />
           <Route exact path="/home" component={Home} />
-          <Route  path="/jobadvertisements" component={JobAdvertisementList} />
-          <Route  path="/employers" component={EmployerList} />
-          <Route  path="/employees" component={EmployeesList} />
-          <Route  path="/candidates" component={CandidateList} />
-          <Route  path="/jobadd" component={JobaAdvertisementAdd} />
-          <Route  path="/jobdetail/:id" component={JobAdvertisementDetail} />
-          <Route  path="/jobadvertisements/:id" component={JobAdvertisementDetail}/>
+          <Route exact path='/jobadvertisements/:title/:city/:workTimeType' component={JobAdvertisementList}/>
+          <Route exact path="/jobadvertisements" component={JobAdvertisementList} />
+          <Route exact path="/employers" component={EmployerList} />
+          <Route exact path="/jobconfirm" component={JobConfirmList} />
+          <Route exact path="/employees" component={EmployeesList} />
+          <Route exact path="/candidates" component={CandidateList} />
+          <Route exact path="/jobadd" component={JobaAdvertisementAdd} />
+          <Route exact path="/jobadvertisements/:id" component={JobAdvertisementDetail}/>
           </Grid.Column> 
         </Grid.Row>
       </Grid>

@@ -1,145 +1,148 @@
-import React, { useState, useEffect } from "react";
-import {
-  Table,
-  Segment,
-  Container,
-  Icon,
-  Card,
-  Button,
-  Divider
-} from "semantic-ui-react";
-import JobAdvertisementService from "../../services/jobAdvertisementService";
-import swal from "sweetalert";
+import React, { useState, useEffect } from 'react'
+import {Segment,Container,Label,Table,Icon,Card,Button} from 'semantic-ui-react'
+import EmployeeService from '../../services/employeeService'
+import * as moment from 'moment'
 
 export default function EmployeesList() {
-  const [jobAdvertisements, setJobAdvertisements] = useState([]);
-  let jobAdvertisementService = new JobAdvertisementService();
 
-  useEffect(() => {
-    let jobAdvertisementService = new JobAdvertisementService();
-    jobAdvertisementService
-      .getConfirmStatusFalse()
-      .then((result) => setJobAdvertisements(result.data.data));
-  }, []);
+    const [employees, setEmployees] = useState([])
 
-  const confirmStatusTrue = (jobAdvertisementId) => {
-    jobAdvertisementService.updateConfirmStatus(jobAdvertisementId).then(
-      swal({
-        title: "Başarılı!",
-        text: "İş ilanı onaylandı!",
-        icon: "success",
-        button: "OK",
-      }).then(function () {
-        window.location.reload();
-      })
-    );
-  };
+    useEffect(() => {
+        let employeeService=new EmployeeService();
+        employeeService.getEmployee().then(result=>setEmployees(result.data.data))
+    }, [])
 
-  const deleteJob = (jobAdvertisementId) => {
-    jobAdvertisementService.deleteJobAdvertisement(jobAdvertisementId).then(swal({
-
-        title:"Emin Misiniz?",
-        icon:"warning",
-        buttons:true,
-        dangerMode:true
-
-    })
-    .then((willDelete)=>{
-        if(willDelete){
-        swal("İş ilanı silindi.",{icon:"success"})
-        .then(function(){window.location.reload()});
-    }}));
-};
-
-  return (
-    <div>
-      <Segment style={{ padding: "17em 0em" }} vertical>
+    return (
+        <div>
+             <Segment style={{ padding: "17em 0em" }} vertical>
         <Container>
-          <Card fluid color="orange">
-            {" "}
-            <Card.Header
-              as="h2"
-              textAlign="center"
-              style={{ fontSize: "2em", marginBottom: "1em", marginTop: "1em" }}
-            >
-              <Icon name="edit outline" color="orange" />
-              Onay Bekleyen İlanlar
-            </Card.Header>
-            <Card.Content>
-              <Table color="orange">
-                <Table.Header>
-                  <Table.Row>
-                    <Table.HeaderCell>Firma Adı</Table.HeaderCell>
-                    <Table.HeaderCell>Şehir</Table.HeaderCell>
-                    <Table.HeaderCell>Pozisyon</Table.HeaderCell>
-                    <Table.HeaderCell>Alınacak Kişi Sayısı</Table.HeaderCell>
-                    <Table.HeaderCell>Son Başvuru Tarihi</Table.HeaderCell>
-                    <Table.HeaderCell>Maaş Aralığı</Table.HeaderCell>
-                    <Table.HeaderCell>Onay Durumu</Table.HeaderCell>
-                    <Table.HeaderCell>Onay İşlemi</Table.HeaderCell>
-                  </Table.Row>
-                </Table.Header>
+       
+              {employees.map(employee=>(
 
-                <Table.Body >
-                  {jobAdvertisements.map((jobAdvertisement) => (
-                    <Table.Row key={jobAdvertisement.id} 
-                    >
-                      <Table.Cell>
-                        {jobAdvertisement.employer.companyName}
-                      </Table.Cell>
-                      <Table.Cell>{jobAdvertisement.city.cityName} </Table.Cell>
-                      <Table.Cell>{jobAdvertisement.jobTitle.title}</Table.Cell>
-                      <Table.Cell>{jobAdvertisement.quata}</Table.Cell>
-                      <Table.Cell>
-                        {jobAdvertisement.applicationDeadline}
-                      </Table.Cell>
-                      <Table.Cell>
-                        {jobAdvertisement.minSalary}-
-                        {jobAdvertisement.maxSalary}
-                      </Table.Cell>
-                      <Table.Cell>
-                        {jobAdvertisement.confirmStatus === false
-                          ? "Onaylanmadı"
-                          : "Onaylandı"}
-                      </Table.Cell>
-                      <Table.Cell>
-                         
-                        <Button
-                          animated
-                          basic
-                          color="green"
-                          onClick={(e) =>
-                            confirmStatusTrue(jobAdvertisement.id)
-                          }
-                        >
-                          <Button.Content visible>Onayla</Button.Content>
-                          <Button.Content hidden>
-                            <Icon name="check" />
-                          </Button.Content>
-                        </Button>
-                        <Divider />
-                        <Button
-                          animated
-                          basic
-                          color="orange"
-                          onClick={(e) =>
-                            deleteJob(jobAdvertisement.id)
-                          }
-                        >
-                          <Button.Content visible>İlanı Sil</Button.Content>
-                          <Button.Content hidden>
-                            <Icon name="delete" />
-                          </Button.Content>
-                        </Button>
-                      </Table.Cell>
-                    </Table.Row>
-                  ))}
-                </Table.Body>
-              </Table>
-            </Card.Content>
-          </Card>
-        </Container>
-      </Segment>
-    </div>
-  );
+             
+                <Card fluid color="blue" key={employee.id}>
+                  <Card.Content>
+
+
+                  
+                    <Card.Meta>
+                      <Table
+                        verticalAlign="middle"
+                        basic="very"
+                        style={{ marginTop: "2em" }}
+                      >
+                        <Table.Body>
+                          <Table.Row textAlign="center">
+                            <Table.Cell>
+                              <Label
+                                basic
+                                color="blue"
+                                pointing="right"
+                                style={{
+                                  fontSize: "1.2em",
+                                }}
+                              >
+                                  <Icon name="user"/>{" "}
+                                Adı:
+                              </Label>
+                            </Table.Cell>
+                            <Table.Cell style={{
+                                  fontSize: "1.4em",
+                                }} textAlign="center">
+                              {" "}
+                             
+                            {employee.firstName}
+                            </Table.Cell>
+                          </Table.Row>
+                          <Table.Row textAlign="center">
+                            <Table.Cell>
+                              {" "}
+                              <Label basic color="blue" pointing="right" style={{
+                                  fontSize: "1.2em",
+                                }}>
+                                     <Icon name="user"/>{" "}
+                                Soyadı:
+                              </Label>
+                            </Table.Cell>
+                            <Table.Cell style={{
+                                  fontSize: "1.4em",
+                                }}>
+                              {employee.lastName}
+                            </Table.Cell>
+                          </Table.Row>
+                          <Table.Row textAlign="center">
+                            <Table.Cell>
+                              {" "}
+                              <Label basic color="blue" pointing="right" style={{
+                                  fontSize: "1.2em",
+                                }}>
+                               <Icon name="mail"/> Mail:
+                              </Label>
+                            </Table.Cell>
+                            <Table.Cell style={{
+                                  fontSize: "1.4em",
+                                }}>
+                             {employee.email}
+                            </Table.Cell>
+                          </Table.Row>
+
+                          <Table.Row textAlign="center">
+                            <Table.Cell>
+                              {" "}
+                              <Label basic color="blue" pointing="right" style={{
+                                  fontSize: "1.2em",
+                                }}>
+                                     <Icon name="key"/> {" "}
+                                Şifre:
+                              </Label>
+                            </Table.Cell>
+                            <Table.Cell style={{
+                                  fontSize: "1.2em",
+                                }}>
+                              {employee.password}
+                            </Table.Cell>
+                          </Table.Row>
+
+                          <Table.Row textAlign="center">
+                            <Table.Cell>
+                              {" "}
+                              <Label basic color="blue" pointing="right" style={{
+                                  fontSize: "1.2em",
+                                }}>
+                                     <Icon name="calendar"/>{" "}
+                                İşe Başlama Tarihi:
+                              </Label>
+                            </Table.Cell>
+                            <Table.Cell style={{
+                                  fontSize: "1.4em",
+                                }}> {moment(employee.createdDate).format(
+                                    "DD.MM.yyyy"
+                                  )}</Table.Cell>
+                          </Table.Row>
+                        </Table.Body>
+                      </Table>
+                    </Card.Meta>
+                  </Card.Content>
+                
+                 
+                </Card>
+                 ))}
+                
+                  <Button
+                  type="submit"
+                  animated
+                  basic
+                  color="blue"
+                  size="massive"
+                  style={{ marginBottom: "0.4em" }}
+                >
+                  <Button.Content visible>Güncelle</Button.Content>
+                  <Button.Content hidden>
+                    <Icon name="edit" />
+                  </Button.Content>
+                </Button>
+
+            </Container>  </Segment>
+        </div>
+    )
 }
