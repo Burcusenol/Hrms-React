@@ -123,11 +123,7 @@ export default function EmployeesList() {
                       </Table>
                     </Card.Meta>
                   </Card.Content>
-                
-                 
-                </Card>
-                 ))}
-                
+                <Card.Description>
                   <Button
                   type="submit"
                   animated
@@ -140,7 +136,10 @@ export default function EmployeesList() {
                   <Button.Content hidden>
                     <Icon name="edit" />
                   </Button.Content>
-                </Button>
+                </Button></Card.Description>
+                </Card>
+                 ))}
+              
 
             </Container>  </Segment>
         </div>

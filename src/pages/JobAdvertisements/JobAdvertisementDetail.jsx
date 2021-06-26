@@ -144,7 +144,7 @@ export default function JobAdvertisementDetails() {
                               </Label>
                             </Table.Cell>
                             <Table.Cell style={{
-                                  fontSize: "1.2em",
+                                  fontSize: "1.4em",
                                 }}>
                               {moment(jobPost.applicationDeadline).format(
                                 "DD.MM.yyyy"

@@ -9,6 +9,7 @@ import JobaAdvertisementAdd from '../pages/JobAdvertisements/JobAdvertisementAdd
 import JobAdvertisementDetail from '../pages/JobAdvertisements/JobAdvertisementDetail';
 import JobConfirmList from '../pages/Employees/JobConfirmList';
 import EmployeesList from '../pages/Employees/EmployeesList';
+import Resume from '../pages/Resume/Resume';
 export default function Dashboard() {
   return (
     <div>
@@ -27,6 +28,7 @@ export default function Dashboard() {
           <Route exact path="/candidates" component={CandidateList} />
           <Route exact path="/jobadd" component={JobaAdvertisementAdd} />
           <Route exact path="/jobadvertisements/:id" component={JobAdvertisementDetail}/>
+          <Route exact path="/resume/:candidateId" component={Resume} />
           </Grid.Column> 
         </Grid.Row>
       </Grid>

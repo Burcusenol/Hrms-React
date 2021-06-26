@@ -22,7 +22,8 @@ export default function JobAdvertisementList() {
       .then((result) => setJobPosts(result.data.data));
   }, []);
   return (
-    <div><Filter/>
+    <div>
+      <Filter/>
       <Segment circle="true"  style={{ padding: "8em 0em" }} vertical>
         <Container>
           

@@ -10,8 +10,10 @@ import {
   Pagination,
   Grid,
 } from "semantic-ui-react";
+import { NavLink } from "react-router-dom";
 import CandidateService from "../../services/candidateService";
 export default function CandidateList() {
+ 
   const [candidates, setCandidates] = useState([]);
 
   useEffect(() => {
@@ -93,6 +95,8 @@ export default function CandidateList() {
                   <Grid.Column width={3}>
 
                         <Button
+                         as={NavLink}
+                         to={`/resume/${candidate.id}`}
                         style={{ marginTop: "1.5em" }}
                     circular
                     
