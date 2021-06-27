@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import {
   Card,
-  Button,
   Icon,
   Segment,
   Container,
@@ -11,9 +10,9 @@ import {
 } from "semantic-ui-react";
 import LanguageService from "../../services/languageService";
 import { useParams } from "react-router-dom";
-import LanguageUpdate from './LanguageUpdate' 
+import LanguageUpdate from "./LanguageUpdate";
+import LanguageAdd from "./LanguageAdd";
 export default function LanguageList() {
-
   let { candidateId } = useParams();
 
   const [languages, setLanguages] = useState([]);
@@ -24,42 +23,27 @@ export default function LanguageList() {
       .then((result) => setLanguages(result.data.data));
   }, [candidateId]);
 
-
-
   return (
     <div>
       <Segment circle="true" vertical>
         <Container>
-          <Message color="olive">
-            <Message.Header
-              textalign="left"
-              style={{
-                textalign: "left",
-                fontSize: "2em",
-                color: "purple",
-                marginTop: "0.75em",
-              }}
-            >
-              {" "}
-              <Icon name="language" color="violet" /> Dil Bilgisi{" "}
-              <Button
-                type="submit"
-                floated="right"
-                animated
-                basic
-                color="violet"
-                size="large"
-                style={{ marginBottom: "1em" }}
+          {languages.map((language) => (
+            <Message color="olive">
+              <Message.Header
+                textalign="left"
+                style={{
+                  textalign: "left",
+                  fontSize: "2em",
+                  color: "purple",
+                  marginTop: "0.75em",
+                }}
               >
-                <Button.Content visible>Ekle</Button.Content>
-                <Button.Content hidden>
-                  <Icon name="check" />
-                </Button.Content>
-              </Button>
-            </Message.Header>
+                {" "}
+                <Icon name="language" color="violet" /> Dil Bilgisi{" "}
+                <LanguageAdd language={language.id} />
+              </Message.Header>
 
-            {languages.map((language) => (
-              <Card fluid color="violet" key={language.id}>
+              <Card fluid color="violet">
                 <Card.Content>
                   <Card.Meta>
                     <Table
@@ -123,8 +107,8 @@ export default function LanguageList() {
                   <LanguageUpdate language={language} />
                 </Card.Description>
               </Card>
-            ))}
-          </Message>
+            </Message>
+          ))}
         </Container>
       </Segment>
     </div>
