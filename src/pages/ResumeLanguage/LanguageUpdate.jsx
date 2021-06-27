@@ -102,7 +102,7 @@ export default function LanguageUpdate({ language }) {
                   <Card fluid color="blue">
                     <Card.Content>
                       <Form onSubmit={formik.handleSubmit}>
-                        <Form.Field>
+                      <Form.Field>
                           <Label basic color="blue">
                             <Icon name="list alternate" /> İsim:
                           </Label>
@@ -182,14 +182,15 @@ export default function LanguageUpdate({ language }) {
                             </div>
                           )}
                         </Form.Field>
-                        <Modal.Actions>
+                        <Modal.Actions >
           <Button
+        
             onClick={() => setOpen(false)}
             animated
             basic
             color="blue"
             size="massive"
-            style={{ marginBottom: "0.4em" }}
+            style={{ marginBottom: "0.4em",marginLeft:"19.8em"}}
           >
             <Button.Content visible>Vazgeç</Button.Content>
             <Button.Content hidden>
@@ -202,7 +203,7 @@ export default function LanguageUpdate({ language }) {
             basic
             color="blue"
             size="massive"
-            style={{ marginBottom: "0.4em" }}
+            style={{ marginBottom: "0.4em",marginRigth:"10em"}}
           >
             <Button.Content visible>Kaydet</Button.Content>
             <Button.Content hidden>
