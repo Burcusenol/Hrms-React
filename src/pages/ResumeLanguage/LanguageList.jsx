@@ -11,8 +11,9 @@ import {
 } from "semantic-ui-react";
 import LanguageService from "../../services/languageService";
 import { useParams } from "react-router-dom";
-
+import LanguageUpdate from './LanguageUpdate' 
 export default function LanguageList() {
+
   let { candidateId } = useParams();
 
   const [languages, setLanguages] = useState([]);
@@ -22,6 +23,8 @@ export default function LanguageList() {
       .getLanguages(candidateId)
       .then((result) => setLanguages(result.data.data));
   }, [candidateId]);
+
+
 
   return (
     <div>
@@ -117,19 +120,7 @@ export default function LanguageList() {
 
                 <Card.Description>
                   {" "}
-                  <Button
-                    type="submit"
-                    animated
-                    basic
-                    color="violet"
-                    size="large"
-                    style={{ marginBottom: "2em" }}
-                  >
-                    <Button.Content visible>Güncelle</Button.Content>
-                    <Button.Content hidden>
-                      <Icon name="edit" />
-                    </Button.Content>
-                  </Button>
+                  <LanguageUpdate language={language} />
                 </Card.Description>
               </Card>
             ))}

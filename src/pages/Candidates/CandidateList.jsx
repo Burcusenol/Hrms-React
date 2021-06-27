@@ -105,7 +105,7 @@ export default function CandidateList() {
                     color="red"
                     size="big"
                   >
-                    <Button.Content visible>Detaya Git</Button.Content>
+                    <Button.Content visible>Profile Git</Button.Content>
                     <Button.Content hidden>
                       <Icon name="arrow right" />
                     </Button.Content>

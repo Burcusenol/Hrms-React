@@ -10,6 +10,7 @@ import JobAdvertisementDetail from '../pages/JobAdvertisements/JobAdvertisementD
 import JobConfirmList from '../pages/Employees/JobConfirmList';
 import EmployeesList from '../pages/Employees/EmployeesList';
 import Resume from '../pages/Resume/Resume';
+
 export default function Dashboard() {
   return (
     <div>

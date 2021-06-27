@@ -6,6 +6,7 @@ import SocialMediaList from "../SocialMedia/SocialMediaList";
 import TechnologyList from "../Technologies/TechnologyList";
 import CoverLetter from "../CoverLetter/CoverLetter";
 import { useParams } from "react-router-dom";
+import * as moment from 'moment';
 import CandidateService from "../../services/candidateService";
 import {
   Icon,
@@ -14,26 +15,31 @@ import {
   Segment,
   Container,
   Grid,
-  Message
+  Message,
+  Table,
+  Label
 } from "semantic-ui-react";
 import ImageList from "../ResumeImages/ImageList";
 
+
 export default function Resume() {
   let { candidateId } = useParams();
-  const [candidates, setCandidates] = useState([]);
+  const [candidate, setCandidate] = useState({});
 
   useEffect(() => {
     let candidateService = new CandidateService();
     candidateService
       .getById(candidateId)
-      .then((result) => setCandidates(result.data.data));
+      .then((result) => setCandidate(result.data.data));
   }, [candidateId]);
+
+  
 
   return (
     <div>
       <Segment circle="true" vertical>
         <Container>
-        <Message color="olive">
+          <Message color="olive">
             <Message.Header
               textalign="left"
               style={{
@@ -44,7 +50,7 @@ export default function Resume() {
               }}
             >
               {" "}
-              <Icon name="user outline" color="violet" /> İletişim Bilgileri {" "}
+              <Icon name="user outline" color="violet" /> İletişim Bilgileri{" "}
               <Button
                 type="submit"
                 floated="right"
@@ -60,59 +66,115 @@ export default function Resume() {
                 </Button.Content>
               </Button>
             </Message.Header>
-          <Card
-            fluid
-            color="purple"
-            circle="true"
-            style={{
-              minHeight: 350,
-              fontSize: "1.2em",
-              fontWeight: "normal",
-              padding: "3.4em 1em",
-            }}
-          >
-            <Grid>
-              <Grid.Column width={3}>
-                <ImageList />
-                {""}
-              </Grid.Column>
-              <Grid.Column width={10}>
-                <Card.Content style={{ marginTop: "1em" }}>
-                  <Card.Header style={{ fontSize: "2em" }}></Card.Header>
 
-                  <Card.Description
-                    textAlign="center"
-                    style={{ marginTop: "3em" }}
-                  >
-                    {" "}
-                    <Icon circular fitted color="violet" name="circle" />{" "}
-                  </Card.Description>
+            <Card
+              fluid
+              color="purple"
+              circle="true"
+              style={{
+                minHeight: 350,
+                fontSize: "1.2em",
+                fontWeight: "normal",
+                padding: "3.4em 1em",
+              }}
+            >
+              <Grid>
+                <Grid.Column width={6} >
+                  <ImageList />
+                  {""}
+                </Grid.Column>
+                <Grid.Column width={8}>
+                  <Card.Content style={{ marginTop: ".50em" }}>
+                    <Card.Header
+                      style={{ fontSize: "2em",color: "purple" }}
+                    >
+                      {" "}
+                      {candidate.firstName} {candidate.lastName}
+                    </Card.Header>
 
-                  <Card.Description textAlign="center">
-                    {" "}
-                    <Icon fitted circular color="orange" name="mail" />{" "}
-                  </Card.Description>
-                  <Card.Description textAlign="center">
-                    {" "}
-                    <Icon
-                      circular
-                      fitted
-                      color="green"
-                      name="calendar alternate"
-                    />{" "}
-                  </Card.Description>
-                </Card.Content>
-              </Grid.Column>
-              <Grid.Column width={3}></Grid.Column>
-            </Grid>
-          </Card>
+                    <Table
+                      verticalAlign="middle"
+                      textAlign="left"
+                      basic="very"
+                      collapsing
+                      style={{ marginTop: "2em" }}
+                    >
+                      <Table.Body>
+                     
+                        <Table.Row >
+                          <Table.Cell>
+                            <Label
+                              basic
+                              color="violet"
+                              pointing="right"
+                              style={{
+                                fontSize: "1.2em",
+                              }}
+                            >
+                                 <Icon fitted  color="violet" name="mail" />{" "} 
+                              Email:
+                            </Label>
+                          </Table.Cell>
+                          <Table.Cell
+                            style={{
+                              fontSize: "1.3em",
+                            }}
+                            textAlign="center"
+                          >
+                            {" "}
+                            {candidate.email}
+                          </Table.Cell>
+                        </Table.Row>
+                        <Table.Row textAlign="center">
+                          <Table.Cell>
+                            {" "}
+                            <Label
+                              basic
+                              color="violet"
+                              pointing="right"
+                              style={{
+                                fontSize: "1.2em",
+                              }}
+
+                            >
+                                  <Icon
+                        fitted
+                        color="violet"
+                        name="calendar alternate"
+                      />{" "}
+                              Doğum Yılı:
+                            </Label>
+                          </Table.Cell>
+                          <Table.Cell
+                            style={{
+                              fontSize: "1.3em",
+                            }}
+                          >
+                            
+                            {moment(candidate.birthDate).format(
+                                "DD.MM.yyyy"
+                              )}
+                          </Table.Cell>
+                        </Table.Row>
+
+
+                      </Table.Body>
+                    </Table>
+                  </Card.Content>
+                </Grid.Column>
+              </Grid>
+            </Card>
           </Message>
         </Container>
       </Segment>
 
       <CoverLetter></CoverLetter>
       <EducationList></EducationList>
-      <LanguageList></LanguageList>
+
+ 
+
+     <LanguageList></LanguageList>
+
       <JobExperienceList></JobExperienceList>
       <SocialMediaList></SocialMediaList>
       <TechnologyList></TechnologyList>

@@ -15,6 +15,7 @@ export default function ImageList() {
     <div>
       {images.map((image) => (
         <Image
+        key={image.id}
           centered
           style={{ marginLeft: "10em", marginBottom: "2em", marginTop: "2em" }}
           verticalAlign="bottom"
