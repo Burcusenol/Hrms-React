@@ -11,5 +11,9 @@ export default class CandidateService{
     getById(candidateId){
         return axios.get("/candidates/getById?id="+candidateId)
     }
+
+    update(candidate){
+        return axios.put("/candidates/update",candidate)
+    }
   
 }

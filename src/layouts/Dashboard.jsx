@@ -10,6 +10,7 @@ import JobAdvertisementDetail from '../pages/JobAdvertisements/JobAdvertisementD
 import JobConfirmList from '../pages/Employees/JobConfirmList';
 import EmployeesList from '../pages/Employees/EmployeesList';
 import Resume from '../pages/Resume/Resume';
+import FavoriteJobAdvertisement from '../pages/Candidates/FavoriteJobAdvertisement';
 
 export default function Dashboard() {
   return (
@@ -28,8 +29,10 @@ export default function Dashboard() {
           <Route exact path="/employees" component={EmployeesList} />
           <Route exact path="/candidates" component={CandidateList} />
           <Route exact path="/jobadd" component={JobaAdvertisementAdd} />
+          <Route exact path="/favorites" component={FavoriteJobAdvertisement} />
           <Route exact path="/jobadvertisements/:id" component={JobAdvertisementDetail}/>
           <Route exact path="/resume/:candidateId" component={Resume} />
+
           </Grid.Column> 
         </Grid.Row>
       </Grid>

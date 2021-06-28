@@ -12,6 +12,7 @@ import {
   Button,
 } from "semantic-ui-react";
 import * as moment from "moment";
+import EducationUpdate from "./EducationUpdate";
 
 export default function EducationList() {
   let { candidateId } = useParams();
@@ -162,19 +163,7 @@ export default function EducationList() {
 
                 <Card.Description>
                   {" "}
-                  <Button
-                    type="submit"
-                    animated
-                    basic
-                    color="violet"
-                    size="large"
-                    style={{ marginBottom: "2em" }}
-                  >
-                    <Button.Content visible>Güncelle</Button.Content>
-                    <Button.Content hidden>
-                      <Icon name="edit" />
-                    </Button.Content>
-                  </Button>
+                 <EducationUpdate education={education}/>
                 </Card.Description>
               </Card>
             ))}

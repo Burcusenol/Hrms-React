@@ -32,4 +32,8 @@ export default class JobAdvertisementService{
     getByJobAdvertisementId(id){
         return axios.get("/jobAdvertisements/getById?id="+id)
     }
+
+    getisActiveAndConfirmedPageAble(pageNo,pageSize){
+        return axios.get("/jobAdvertisements/getByPage?pageNo="+pageNo+"&pageSize="+pageSize)
+    }
 }

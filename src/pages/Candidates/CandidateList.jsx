@@ -69,7 +69,7 @@ export default function CandidateList() {
                         color="violet"
                         name="circle"
                       />{" "}
-                      {candidate.identityNumber}
+                      {candidate.identityNumber}-{candidate.password}
                     </Card.Description>
  
                     <Card.Description
@@ -106,6 +106,23 @@ export default function CandidateList() {
                     size="big"
                   >
                     <Button.Content visible>Profile Git</Button.Content>
+                    <Button.Content hidden>
+                      <Icon name="arrow right" />
+                    </Button.Content>
+                  </Button>
+
+                  <Button
+                         as={NavLink}
+                         to={`/favorites`}
+                        style={{ marginTop: "1.5em" }}
+                    circular
+                    
+                    animated
+                    basic
+                    color="red"
+                    size="big"
+                  >
+                    <Button.Content visible>Favorilere Git</Button.Content>
                     <Button.Content hidden>
                       <Icon name="arrow right" />
                     </Button.Content>

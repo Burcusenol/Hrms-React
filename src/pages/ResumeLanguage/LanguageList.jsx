@@ -12,6 +12,7 @@ import LanguageService from "../../services/languageService";
 import { useParams } from "react-router-dom";
 import LanguageUpdate from "./LanguageUpdate";
 import LanguageAdd from "./LanguageAdd";
+
 export default function LanguageList() {
   let { candidateId } = useParams();
 
@@ -28,8 +29,10 @@ export default function LanguageList() {
       <Segment circle="true" vertical>
         <Container>
           {languages.map((language) => (
-            <Message color="olive">
+            <Message color="olive" key={language.id} >
+              
               <Message.Header
+              
                 textalign="left"
                 style={{
                   textalign: "left",
@@ -40,10 +43,12 @@ export default function LanguageList() {
               >
                 {" "}
                 <Icon name="language" color="violet" /> Dil Bilgisi{" "}
-                <LanguageAdd language={language.id} />
+               
               </Message.Header>
+              <LanguageAdd language={language.id} />
 
-              <Card fluid color="violet">
+     
+              <Card fluid color="violet"  >
                 <Card.Content>
                   <Card.Meta>
                     <Table
@@ -106,9 +111,9 @@ export default function LanguageList() {
                   {" "}
                   <LanguageUpdate language={language} />
                 </Card.Description>
-              </Card>
+              </Card> 
             </Message>
-          ))}
+         ))}
         </Container>
       </Segment>
     </div>

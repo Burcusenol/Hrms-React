@@ -10,7 +10,6 @@ import * as moment from 'moment';
 import CandidateService from "../../services/candidateService";
 import {
   Icon,
-  Button,
   Card,
   Segment,
   Container,
@@ -20,6 +19,7 @@ import {
   Label
 } from "semantic-ui-react";
 import ImageList from "../ResumeImages/ImageList";
+import ResumeUpdate from "./ResumeUpdate";
 
 
 export default function Resume() {
@@ -51,20 +51,7 @@ export default function Resume() {
             >
               {" "}
               <Icon name="user outline" color="violet" /> İletişim Bilgileri{" "}
-              <Button
-                type="submit"
-                floated="right"
-                animated
-                basic
-                color="violet"
-                size="large"
-                style={{ marginBottom: "1em" }}
-              >
-                <Button.Content visible>Güncelle</Button.Content>
-                <Button.Content hidden>
-                  <Icon name="edit" />
-                </Button.Content>
-              </Button>
+            <ResumeUpdate candidate={candidate} />
             </Message.Header>
 
             <Card
@@ -101,6 +88,8 @@ export default function Resume() {
                     >
                       <Table.Body>
                      
+                   
+
                         <Table.Row >
                           <Table.Cell>
                             <Label

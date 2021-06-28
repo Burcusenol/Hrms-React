@@ -9,8 +9,9 @@ import {
   Segment,
   Container,
   Message,
-  Card,
+  Card
 } from "semantic-ui-react";
+import TechnologyUpdate from "./TechnologyUpdate";
 
 export default function TechnologyList() {
   let { candidateId } = useParams();
@@ -58,6 +59,7 @@ export default function TechnologyList() {
                 <Card.Content>
                   <Card.Meta>
                     <Table basic="very" style={{ marginTop: "2em" }}>
+                      <Table.Body>
                       <Table.Row textAlign="center">
                         <Table.Cell width={8}>
                           <Label
@@ -80,8 +82,12 @@ export default function TechnologyList() {
                           {technology.technologyName}
                         </Table.Cell>
                       </Table.Row>
+                      </Table.Body>
                     </Table>
                   </Card.Meta>
+                  <Card.Description>
+               <TechnologyUpdate technology={technology}/>
+                  </Card.Description>
                 </Card.Content>
               </Card>
             ))}

@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 import JobExperienceService from '../../services/jobExperienceService'
 import { Label,Button,Table,Card,Container,Segment,Icon,Message } from 'semantic-ui-react'
 import * as moment from 'moment'
+import JobExperienceUpdate from './JobExperienceUpdate'
 
 export default function JobExperienceList() {
 
@@ -151,19 +152,7 @@ export default function JobExperienceList() {
 
                 <Card.Description>
                   {" "}
-                  <Button
-                    type="submit"
-                    animated
-                    basic
-                    color="violet"
-                    size="large"
-                    style={{ marginBottom: "2em" }}
-                  >
-                    <Button.Content visible>Güncelle</Button.Content>
-                    <Button.Content hidden>
-                      <Icon name="edit" />
-                    </Button.Content>
-                  </Button>
+                <JobExperienceUpdate jobExperience={jobExperience}/>
                 </Card.Description>
               </Card>
             ))}

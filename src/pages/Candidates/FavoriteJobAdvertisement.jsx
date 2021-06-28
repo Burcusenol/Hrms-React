@@ -1,33 +1,88 @@
-import React, { useState, useEffect } from "react";
-import {
-  Segment,
-  Container,
-  Label,
-  Table,
-  Icon,
-  Card
-} from "semantic-ui-react";
-import EmployeeService from "../../services/employeeService";
+import React,{useState,useEffect} from "react";
+import { Label, Table, Card, Icon,Segment,Container,Button } from "semantic-ui-react";
 import * as moment from "moment";
-import EmployeeUpdate from "./EmployeeUpdate";
+import swal from "sweetalert";
+import FavoriteService from "../../services/favoriteService";
 
-export default function EmployeesList() {
-  const [employees, setEmployees] = useState([]);
-
+export default function FavoriteJobAdvertisement() {
+  const [favorites, setFavorites] = useState([]);
+ 
   useEffect(() => {
-    let employeeService = new EmployeeService();
-    employeeService
-      .getEmployee()
-      .then((result) => setEmployees(result.data.data));
+    let favoriteService = new FavoriteService();
+    favoriteService
+      .getByCandidateId(1)
+      .then((result) => setFavorites(result.data.data));
   }, []);
 
+
+  const deleteToFavorites = (id) => {
+      let favoriteService=new FavoriteService();
+    favoriteService.deleteFavorites(id).then(swal({
+
+        title:"Emin Misiniz?",
+        icon:"warning",
+        buttons:true,
+        dangerMode:true
+
+    })
+    .then((willDelete)=>{
+        if(willDelete){
+        swal("İlan favorilerde kaldırıldı.",{icon:"success"})
+        .then(function(){window.location.reload()});
+    }}));
+};
   return (
     <div>
-      <Segment style={{ padding: "17em 0em" }} vertical>
+      <Segment circle="true" style={{ padding: "10em 0em" }} vertical>
         <Container>
-          {employees.map((employee) => (
-            <Card fluid color="blue" key={employee.id}>
+          <Card.Group itemsPerRow={2}>
+              {favorites.map(favorite=>(
+
+             
+            <Card fluid color="green" key={favorite.id}>
               <Card.Content>
+                <Card.Header
+                  textAlign="center"
+                  style={{
+                    fontSize: "2em",
+                    color: "purple",
+                    marginTop: "1em",
+                  }}
+                >
+                  {favorite.jobAdvertisement?.jobTitle?.title}
+                </Card.Header>
+                <Card.Meta
+                  textAlign="center"
+                  style={{
+                    fontSize: "1.5em",
+                    color: "grey",
+                    marginTop: "1em",
+                  }}
+                >
+                  <Icon name="building outline" color="brown" />{" "}
+                  {favorite.jobAdvertisement?.employer?.companyName}
+                </Card.Meta>
+                <Card.Meta
+                  textAlign="center"
+                  style={{
+                    fontSize: "1.5em",
+                    color: "grey",
+                    marginTop: "0.50em",
+                  }}
+                >
+                  <Icon name="map marker" color="blue" />{" "}
+                {favorite.jobAdvertisement?.city?.cityName}
+                </Card.Meta>
+
+                <Card.Description
+                  style={{
+                    color: "grey",
+                    fontSize: "1.5em",
+                    textAlign: "center",
+                  }}
+                >
+                 {favorite.jobAdvertisement?.description}
+                </Card.Description>
                 <Card.Meta>
                   <Table
                     verticalAlign="middle"
@@ -39,13 +94,13 @@ export default function EmployeesList() {
                         <Table.Cell>
                           <Label
                             basic
-                            color="blue"
+                            color="green"
                             pointing="right"
                             style={{
                               fontSize: "1.2em",
                             }}
                           >
-                            <Icon name="user" /> Adı:
+                            Maaş Aralığı:
                           </Label>
                         </Table.Cell>
                         <Table.Cell
@@ -55,7 +110,8 @@ export default function EmployeesList() {
                           textAlign="center"
                         >
                           {" "}
-                          {employee.firstName}
+                          {favorite.jobAdvertisement?.minSalary} <Icon name="lira" /> -{" "}
+                          {favorite.jobAdvertisement?.maxSalary}<Icon name="lira" />
                         </Table.Cell>
                       </Table.Row>
                       <Table.Row textAlign="center">
@@ -63,13 +119,13 @@ export default function EmployeesList() {
                           {" "}
                           <Label
                             basic
-                            color="blue"
+                            color="green"
                             pointing="right"
                             style={{
                               fontSize: "1.2em",
                             }}
                           >
-                            <Icon name="user" /> Soyadı:
+                            Çalışma Tipi:
                           </Label>
                         </Table.Cell>
                         <Table.Cell
@@ -77,7 +133,7 @@ export default function EmployeesList() {
                             fontSize: "1.4em",
                           }}
                         >
-                          {employee.lastName}
+                         {favorite.jobAdvertisement?.workType?.workTypeName}
                         </Table.Cell>
                       </Table.Row>
                       <Table.Row textAlign="center">
@@ -85,13 +141,13 @@ export default function EmployeesList() {
                           {" "}
                           <Label
                             basic
-                            color="blue"
+                            color="green"
                             pointing="right"
                             style={{
                               fontSize: "1.2em",
                             }}
                           >
-                            <Icon name="mail" /> Mail:
+                            Çalışma Zamanı Tipi:
                           </Label>
                         </Table.Cell>
                         <Table.Cell
@@ -99,7 +155,7 @@ export default function EmployeesList() {
                             fontSize: "1.4em",
                           }}
                         >
-                          {employee.email}
+                          {favorite.jobAdvertisement?.workTimeType?.workTimeName}
                         </Table.Cell>
                       </Table.Row>
 
@@ -108,21 +164,23 @@ export default function EmployeesList() {
                           {" "}
                           <Label
                             basic
-                            color="blue"
+                            color="green"
                             pointing="right"
                             style={{
                               fontSize: "1.2em",
                             }}
                           >
-                            <Icon name="key" /> Şifre:
+                            Son Başvuru Tarihi:
                           </Label>
                         </Table.Cell>
                         <Table.Cell
                           style={{
-                            fontSize: "1.2em",
+                            fontSize: "1.4em",
                           }}
                         >
-                          {employee.password}
+                         {moment(favorite.jobAdvertisement?.applicationDeadline).format(
+                                "DD.MM.yyyy"
+                              )}
                         </Table.Cell>
                       </Table.Row>
 
@@ -131,13 +189,13 @@ export default function EmployeesList() {
                           {" "}
                           <Label
                             basic
-                            color="blue"
+                            color="green"
                             pointing="right"
                             style={{
                               fontSize: "1.2em",
                             }}
                           >
-                            <Icon name="calendar" /> İşe Başlama Tarihi:
+                            Alınacak Personel Sayısı:
                           </Label>
                         </Table.Cell>
                         <Table.Cell
@@ -145,20 +203,18 @@ export default function EmployeesList() {
                             fontSize: "1.4em",
                           }}
                         >
-                          {" "}
-                          {moment(employee.createdDate).format("DD.MM.yyyy")}
+                         {favorite.jobAdvertisement?.quata}
                         </Table.Cell>
                       </Table.Row>
                     </Table.Body>
                   </Table>
+                  <Button basic color="red"  size="large"   onClick={(e) =>deleteToFavorites(favorite.id)} ><Icon name="delete"/> Favorilerden Kaldır</Button>
                 </Card.Meta>
               </Card.Content>
-              <Card.Description>
-                <EmployeeUpdate employee={employee} />
-              </Card.Description>
             </Card>
-          ))}
-        </Container>{" "}
+             ))}
+          </Card.Group>
+        </Container>
       </Segment>
     </div>
   );

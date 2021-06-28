@@ -1,50 +1,62 @@
-import React,{useEffect,useState} from 'react'
-import { useParams } from 'react-router-dom'
-import SocialMediaService from '../../services/socialMediaService';
-import {Table,Segment,Container,Message,Icon,Label,Card,Button} from 'semantic-ui-react'
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import SocialMediaService from "../../services/socialMediaService";
+import {
+  Table,
+  Segment,
+  Container,
+  Message,
+  Icon,
+  Label,
+  Card,
+  Button,
+} from "semantic-ui-react";
+import SocialMediaUpdate from "./SocialMediaUpdate";
 
 export default function SocialMediaList() {
-    let {candidateId}=useParams();
-    const [socialMedias, setsocialMedias] = useState([])
-    useEffect(() => {
-        let socialMediaService=new SocialMediaService()
-        socialMediaService.getSocialMedias(candidateId).then(result=>setsocialMedias(result.data.data))
-    }, [candidateId])
+  let { candidateId } = useParams();
+  const [socialMedias, setsocialMedias] = useState([]);
+  useEffect(() => {
+    let socialMediaService = new SocialMediaService();
+    socialMediaService
+      .getSocialMedias(candidateId)
+      .then((result) => setsocialMedias(result.data.data));
+  }, [candidateId]);
 
-    return (
-        <div>
-            <Segment circle="true" vertical>
+  return (
+    <div>
+      <Segment circle="true" vertical>
         <Container>
-          <Message color="olive">
-            <Message.Header
-              textalign="left"
-              style={{
-                textalign: "left",
-                fontSize: "2em",
-                color: "purple",
-                marginTop: "0.75em",
-              }}
-            >
-              {" "}
-              <Icon name="comment alternate" color="violet" /> Sosyal Medya{" "} 
-              <Button
-                type="submit"
-                floated="right"
-                animated
-                basic
-                color="violet"
-                size="large"
-                style={{ marginBottom: "1em" }}
+          {socialMedias.map((socialMedia) => (
+            <Message color="olive" key={socialMedia.id}>
+              <Message.Header
+                textalign="left"
+                style={{
+                  textalign: "left",
+                  fontSize: "2em",
+                  color: "purple",
+                  marginTop: "0.75em",
+                }}
               >
-                <Button.Content visible>Ekle</Button.Content>
-                <Button.Content hidden>
-                  <Icon name="check" />
-                </Button.Content>
-              </Button>
-            </Message.Header>
+                {" "}
+                <Icon name="comment alternate" color="violet" /> Sosyal Medya{" "}
+                <Button
+                  type="submit"
+                  floated="right"
+                  animated
+                  basic
+                  color="violet"
+                  size="large"
+                  style={{ marginBottom: "1em" }}
+                >
+                  <Button.Content visible>Ekle</Button.Content>
+                  <Button.Content hidden>
+                    <Icon name="check" />
+                  </Button.Content>
+                </Button>
+              </Message.Header>
 
-            {socialMedias.map((socialMedia) => (
-              <Card fluid color="violet" key={socialMedia.id}>
+              <Card fluid color="violet">
                 <Card.Content>
                   <Card.Meta>
                     <Table
@@ -63,8 +75,7 @@ export default function SocialMediaList() {
                                 fontSize: "1.2em",
                               }}
                             >
-                                <Icon name="github" size="large" color="black"/>{" "}
-                           
+                              <Icon name="github" size="large" color="black" />{" "}
                             </Label>
                           </Table.Cell>
                           <Table.Cell
@@ -73,8 +84,8 @@ export default function SocialMediaList() {
                             }}
                             textAlign="center"
                           >
-                            {" "} 
-                            {socialMedia.githubLink}    
+                            {" "}
+                            {socialMedia.githubLink}
                           </Table.Cell>
                         </Table.Row>
                         <Table.Row textAlign="center">
@@ -88,8 +99,11 @@ export default function SocialMediaList() {
                                 fontSize: "1.2em",
                               }}
                             >
-                               <Icon name="linkedin" size="large" color="black"/>{" "} 
-                           
+                              <Icon
+                                name="linkedin"
+                                size="large"
+                                color="black"
+                              />{" "}
                             </Label>
                           </Table.Cell>
                           <Table.Cell
@@ -107,25 +121,13 @@ export default function SocialMediaList() {
 
                 <Card.Description>
                   {" "}
-                  <Button
-                    type="submit"
-                    animated
-                    basic
-                    color="violet"
-                    size="large"
-                    style={{ marginBottom: "2em" }}
-                  >
-                    <Button.Content visible>Güncelle</Button.Content>
-                    <Button.Content hidden>
-                      <Icon name="edit" />
-                    </Button.Content>
-                  </Button>
+                  <SocialMediaUpdate socialMedia={socialMedia} />
                 </Card.Description>
               </Card>
-            ))}
-          </Message>
+            </Message>
+          ))}
         </Container>
       </Segment>
-        </div>
-    )
+    </div>
+  );
 }

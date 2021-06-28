@@ -9,9 +9,11 @@ import {
   Icon,
   Label,
   Table,
-  Button,
+  Button
 } from "semantic-ui-react";
+import swal from "sweetalert";
 import JobAdvertisementService from "../../services/jobAdvertisementService";
+import FavoriteService from "../../services/favoriteService";
 
 export default function JobAdvertisementDetails() {
   let { id } = useParams();
@@ -24,6 +26,16 @@ export default function JobAdvertisementDetails() {
       .then((result) => setJobPost(result.data.data));
   }, [id]);
 
+const addtoFavorites=()=>{
+  let favoriteService=new FavoriteService();
+  const favorite={
+    candidateId:1,
+    jobAdvertisementId:id
+  }
+  favoriteService.add(favorite).then(swal("Başarılı!", "Favorilere eklendi!", "success"));
+}
+
+
   return (
     <div>
       <Segment circle="true" style={{ padding: "10em 0em" }} vertical>
@@ -33,6 +45,7 @@ export default function JobAdvertisementDetails() {
               <Grid.Column width={11}>
                 <Card fluid color="green">
                   <Card.Content>
+                 
                     <Card.Header
                       textAlign="center"
                       style={{
@@ -41,7 +54,8 @@ export default function JobAdvertisementDetails() {
                         marginTop: "1em",
                       }}
                     >
-                      {jobPost.jobTitle?.title}
+                      
+                      {jobPost.jobTitle?.title} 
                     </Card.Header>
                     <Card.Meta
                       textAlign="center"
@@ -165,15 +179,17 @@ export default function JobAdvertisementDetails() {
                                   fontSize: "1.4em",
                                 }}>{jobPost.quata}</Table.Cell>
                           </Table.Row>
+                         
                         </Table.Body>
-                      </Table>
+                       
+                      </Table><Button basic color="red"  size="large" onClick={()=>addtoFavorites()} ><Icon name="heart"/> Favorilere Ekle</Button>
                     </Card.Meta>
                   </Card.Content>
                 </Card>
               </Grid.Column>
               <Grid.Column width={5} stretched>
                 {" "}
-                <Card fluid color="green" centered="true" >
+                <Card fluid color="green" >
                   <Card.Content>
                     <Card.Header
                       textAlign="center"
@@ -248,6 +264,7 @@ export default function JobAdvertisementDetails() {
                         Başvur
                       </Button>
                     </Card.Description>
+                   
                   </Card.Content>
                 </Card>
               </Grid.Column>
