@@ -36,4 +36,11 @@ export default class JobAdvertisementService{
     getisActiveAndConfirmedPageAble(pageNo,pageSize){
         return axios.get("/jobAdvertisements/getByPage?pageNo="+pageNo+"&pageSize="+pageSize)
     }
+
+    getByisActiveTrueAndConfirmStatusTrueAndFilter(pageNo, pageSize, filter){
+        return axios.post(`/jobAdvertisements/getByisActiveTrueAndConfirmStatusTrueAndFilter?pageNo=${pageNo}&pageSize=${pageSize}`,filter)
+    }
+    getByEmployerId(id){
+        return axios.get("/jobAdvertisements/getByEmployer_Id?employerid="+id)
+    }
 }

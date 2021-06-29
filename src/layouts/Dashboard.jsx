@@ -11,6 +11,7 @@ import JobConfirmList from '../pages/Employees/JobConfirmList';
 import EmployeesList from '../pages/Employees/EmployeesList';
 import Resume from '../pages/Resume/Resume';
 import FavoriteJobAdvertisement from '../pages/Candidates/FavoriteJobAdvertisement';
+import EmployerDetail from '../pages/Employers/EmployerDetail';
 
 export default function Dashboard() {
   return (
@@ -25,6 +26,7 @@ export default function Dashboard() {
           <Route exact path='/jobadvertisements/:title/:city/:workTimeType' component={JobAdvertisementList}/>
           <Route exact path="/jobadvertisements" component={JobAdvertisementList} />
           <Route exact path="/employers" component={EmployerList} />
+          <Route exact path="/employers/:id" component={EmployerDetail} />
           <Route exact path="/jobconfirm" component={JobConfirmList} />
           <Route exact path="/employees" component={EmployeesList} />
           <Route exact path="/candidates" component={CandidateList} />

@@ -17,40 +17,41 @@ import FavoriteService from "../../services/favoriteService";
 import swal from "sweetalert";
 export default function JobAdvertisementList() {
 
-  const [adCount, setAdCount] = useState(0);
   const [pageNo, setPage] = useState(1);
-  const [pageSize, setPageSize] = useState(4);
+  const [filter, setFilter] = useState({});
+  const [pageSize] = useState(4);
   const [jobPosts, setJobPosts] = useState([]);
 
   useEffect(() => {
     let jobPostService = new JobAdvertisementService();
     jobPostService
-      .getisActiveAndConfirmedPageAble(pageNo,pageSize)
+      .getByisActiveTrueAndConfirmStatusTrueAndFilter(pageNo,pageSize,filter)
       .then((result) => setJobPosts(result.data.data));
-  }, [pageNo,pageSize]);
+  }, [filter,pageNo,pageSize]);
 
 
-  function handlePageChange(event, { activePage }) {
-    let jobPostService = new JobAdvertisementService();
+  const handleFilterClick = (filter) => {
+    if(filter.cityId.length === 0){
+      filter.cityId = null;
+    }
+    if(filter.jobTitleId.length === 0){
+      filter.jobTitleId = null;
+    }
+    if(filter.workTypeId.length === 0){
+      filter.workTypeId = null;
+    }
+    if(filter.workTimeTypeId.length === 0){
+      filter.workTimeTypeId = null;
+    }
+    setFilter(filter);
+    setPage(1);
+  }
+
+  const handlePaginationChange = (e, { activePage }) => {
     setPage(activePage);
-    jobPostService.getisActiveAndConfirmedPageAble(activePage, pageSize).then(results => {
-        setJobPosts(results.data.data);
-        setAdCount(results.data.data.length);
-    });
-}
+  }
 
-function handlePageSizeChange(selectedPageSize) {
-  let jobPostService = new JobAdvertisementService();
-    setPageSize(parseInt(selectedPageSize));
-    jobPostService.getisActiveAndConfirmedPageAble(pageNo, pageSize).then(results => {
-        setJobPosts(results.data.data);
-        setAdCount(results.data.data.length);
-        console.log(pageNo)
-        console.log(pageSize)
-    });
-}
-
-
+ 
   const addtoFavorites=()=>{
     let favoriteService=new FavoriteService();
     const favorite={
@@ -62,7 +63,7 @@ function handlePageSizeChange(selectedPageSize) {
 
   return (
     <div>
-      <Filter/>
+      <Filter  clickEvent={handleFilterClick}/>
       <Segment circle="true"  style={{ padding: "8em 0em" }} vertical>
         <Container>
           
@@ -144,18 +145,17 @@ function handlePageSizeChange(selectedPageSize) {
           </Card.Group>
           <br />
           <Pagination
-          activePage={pageNo}
-          boundaryRange={1}
-          siblingRange={1}
-          onPageChange={handlePageChange}
+           
+            boundaryRange={1}
+            siblingRange={1}
+            onPageChange={handlePaginationChange}
             style={{ marginTop: "3.5em" }}
             defaultActivePage={1}
             pointing
             secondary
-            totalPages={10}
             circle="true"
             size="massive"
-            
+            totalPages={5}
           
           />
         </Container>

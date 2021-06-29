@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { NavLink } from "react-router-dom";
 import {
   Button,
   Container,
@@ -77,6 +78,8 @@ export default function EmployerList() {
                     basic
                     color="red"
                     size="big"
+                    as={NavLink}
+                    to={`/employers/${employer.id}`}
                   >
                     <Button.Content visible>Detaya Git</Button.Content>
                     <Button.Content hidden>
