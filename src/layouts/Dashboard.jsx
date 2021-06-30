@@ -12,6 +12,7 @@ import EmployeesList from '../pages/Employees/EmployeesList';
 import Resume from '../pages/Resume/Resume';
 import FavoriteJobAdvertisement from '../pages/Candidates/FavoriteJobAdvertisement';
 import EmployerDetail from '../pages/Employers/EmployerDetail';
+import EmployerUpdateConfirm from '../pages/Employees/EmployerUpdateConfirm';
 
 export default function Dashboard() {
   return (
@@ -28,6 +29,7 @@ export default function Dashboard() {
           <Route exact path="/employers" component={EmployerList} />
           <Route exact path="/employers/:id" component={EmployerDetail} />
           <Route exact path="/jobconfirm" component={JobConfirmList} />
+          <Route exact path="/employerconfirm" component={EmployerUpdateConfirm} />
           <Route exact path="/employees" component={EmployeesList} />
           <Route exact path="/candidates" component={CandidateList} />
           <Route exact path="/jobadd" component={JobaAdvertisementAdd} />

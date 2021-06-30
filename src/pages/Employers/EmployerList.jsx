@@ -13,7 +13,6 @@ import {
 
 } from "semantic-ui-react";
 import EmployerService from "../../services/employerService";
-
 export default function EmployerList() {
   const [employers, setEmployers] = useState([]);
   useEffect(() => {

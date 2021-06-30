@@ -55,6 +55,7 @@ export default function Navi() {
             <Dropdown.Menu>
                 <Dropdown.Item as={NavLink} to="/employees">HRMS Personel</Dropdown.Item>
                    <Dropdown.Item as={NavLink} to="/jobconfirm">Onaylanmamış İlanlar</Dropdown.Item>
+                   <Dropdown.Item as={NavLink} to="/employerconfirm">Onaylanmamış Şirketler</Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
           </Menu.Menu>

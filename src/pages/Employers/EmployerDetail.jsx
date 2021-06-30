@@ -13,6 +13,7 @@ import {
 } from "semantic-ui-react";
 import EmployerService from "../../services/employerService";
 import JobAdvertisementService from "../../services/jobAdvertisementService";
+import EmployerUpdate from "./EmployerUpdate";
 export default function EmployerDetail() {
   let { id } = useParams();
   const [employer, setEmployer] = useState({});
@@ -30,26 +31,32 @@ export default function EmployerDetail() {
     <div>
       <Segment circle="true" style={{ padding: "10em 0em" }} vertical>
         <Container>
-          <Card fluid color="orange">
+          <Card fluid color="orange" key={employer.id}>
             <Card.Content>
               <Card.Header
                 textAlign="center"
                 style={{
-                  fontSize: "2em",
+                  fontSize: "2.3em",
                   color: "brown",
                   marginTop: "1em",
                 }}
               >
                 {employer.companyName}
               </Card.Header>
-
+              <Card.Header> {employer.employerUpdate !=null
+                        ?  <Label basic color="orange" style={{marginLeft:"45em",fontSize:"0.80em"}}>
+                        <Icon name="question" /> Güncelleme için onay bekleniyor.
+                      </Label>
+                       : <Label basic color="orange" style={{marginLeft:"45em",fontSize:"0.80em"}}>
+                       <Icon name="check" /> Bilgileriniz Güncel.
+                     </Label>}</Card.Header>
               <Card.Meta>
                 <Table
                   verticalAlign="middle"
                   basic="very"
                   style={{ marginTop: "2em" }}
                 >
-                  <Table.Body>
+                  <Table.Body  >
                     <Table.Row textAlign="center">
                       <Table.Cell>
                         <Label
@@ -167,23 +174,14 @@ export default function EmployerDetail() {
                     </Table.Row>
                   </Table.Body>
                 </Table>
+
               </Card.Meta>
             </Card.Content>
             <Card.Description>
-              <Button
-                type="submit"
-                animated
-                basic
-                color="orange"
-                size="massive"
-                style={{ marginBottom: "1em" }}
-              >
-                <Button.Content visible>Güncelle</Button.Content>
-                <Button.Content hidden>
-                  <Icon name="edit" />
-                </Button.Content>
-              </Button>
+            <EmployerUpdate employer={employer}/>
+          
             </Card.Description>
+
           </Card>
 
           <Divider />
@@ -218,9 +216,10 @@ export default function EmployerDetail() {
                 </Table.Row>
               </Table.Header>
 
-              <Table.Body textAlign="center">
+              <Table.Body textalign="center">
                 {jobAdvertisements.map((jobAdvertisement) => (
                   <Table.Row
+                   key={jobAdvertisement.id}
                     textAlign="center"
                     style={{
                       fontSize: "1.2em",
@@ -244,7 +243,7 @@ export default function EmployerDetail() {
                     <Table.Cell>
                       {" "}
                       {jobAdvertisement.confirmStatus === false
-                        ? "Onaylanmadı."
+                        ? "Personel onayı bekleniyor."
                         : "Onaylandı."}
                     </Table.Cell>
 
